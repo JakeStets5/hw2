@@ -44,6 +44,20 @@ TEST (load_process_control_blocks, BadFileName) {
 	EXPECT_EQ(NULL, load_process_control_blocks(input_filename));
 }
 
+TEST(first_come_first_serve, NullReadyQueue) {
+    dyn_array_t *ready_queue = NULL;
+    ScheduleResult_t *result = new ScheduleResult_t;
+    EXPECT_EQ(false, first_come_first_serve(ready_queue, result));
+    delete result;
+}
+
+TEST(first_come_first_serve, NullResult) {
+    dyn_array_t *ready_queue = dyn_array_create(0, sizeof(ProcessControlBlock_t), NULL);
+    ScheduleResult_t *result = NULL;
+    EXPECT_EQ(false, first_come_first_serve(ready_queue, result));
+    dyn_array_destroy(ready_queue);
+}
+
 int main(int argc, char **argv) 
 {
     ::testing::InitGoogleTest(&argc, argv);
