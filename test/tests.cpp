@@ -39,6 +39,11 @@ TEST(load_process_control_blocks, NullFileName) {
     EXPECT_EQ(NULL, load_process_control_blocks(input_filename));
 }
 
+TEST (load_process_control_blocks, BadFileName) {
+	const char *input_filename = "\n";
+	EXPECT_EQ(NULL, load_process_control_blocks(input_filename));
+}
+
 int main(int argc, char **argv) 
 {
     ::testing::InitGoogleTest(&argc, argv);
