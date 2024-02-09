@@ -58,6 +58,74 @@ TEST(first_come_first_serve, NullResult) {
     dyn_array_destroy(ready_queue);
 }
 
+TEST(shortest_job_first, NullReadyQueue){
+    dyn_array_t *ready_queue = NULL;
+    ScheduleResult_t *result = new ScheduleResult_t;
+    EXPECT_EQ(false, shortest_job_first(ready_queue, result));
+    delete result;
+}
+
+TEST(shortest_job_first, NullResult) {
+    dyn_array_t *ready_queue = dyn_array_create(0, sizeof(ProcessControlBlock_t), NULL);
+    ScheduleResult_t *result = NULL;
+    EXPECT_EQ(false, shortest_job_first(ready_queue, result));
+    dyn_array_destroy(ready_queue);
+}
+
+TEST(priority, NullReadyQueue){
+    dyn_array_t *ready_queue = NULL;
+    ScheduleResult_t *result = new ScheduleResult_t;
+    EXPECT_EQ(false, priority(ready_queue, result));
+    delete result;
+}
+
+TEST(priority, NullResult) {
+    dyn_array_t *ready_queue = dyn_array_create(0, sizeof(ProcessControlBlock_t), NULL);
+    ScheduleResult_t *result = NULL;
+    EXPECT_EQ(false, priority(ready_queue, result));
+    dyn_array_destroy(ready_queue);
+}
+
+TEST(round_robin, NullReadyQueue){
+    dyn_array_t *ready_queue = NULL;
+    ScheduleResult_t *result = new ScheduleResult_t;
+    size_t quantum = new size_t;
+    EXPECT_EQ(false, round_robin(ready_queue, result));
+    delete result;
+}
+
+TEST(round_robin, NullResult) {
+    dyn_array_t *ready_queue = dyn_array_create(0, sizeof(ProcessControlBlock_t), NULL);
+    ScheduleResult_t *result = NULL;
+    size_t quantum = new size_t;
+    EXPECT_EQ(false, round_robin(ready_queue, result));
+    dyn_array_destroy(ready_queue);
+}
+
+TEST(round_robin, NullQuantum) {
+    dyn_array_t *ready_queue = dyn_array_create(0, sizeof(ProcessControlBlock_t), NULL);
+    ScheduleResult_t *result = new ScheduleResult_t;
+    size_t quantum = NULL;
+    EXPECT_EQ(false, round_robin(ready_queue, result));
+    dyn_array_destroy(ready_queue);
+    delete result;
+}
+
+TEST(shortest_remaining_time_first, NullResult) {
+    dyn_array_t *ready_queue = dyn_array_create(0, sizeof(ProcessControlBlock_t), NULL);
+    ScheduleResult_t *result = NULL;
+    EXPECT_EQ(false, shortest_remaining_time_first(ready_queue, result));
+    dyn_array_destroy(ready_queue);
+}
+
+TEST(shortest_remaining_time_first, NullReadyQueue){
+    dyn_array_t *ready_queue = NULL;
+    ScheduleResult_t *result = new ScheduleResult_t;
+    size_t quantum = new size_t;
+    EXPECT_EQ(false, shortest_remaining_time_first(ready_queue, result));
+    delete result;
+}
+
 int main(int argc, char **argv) 
 {
     ::testing::InitGoogleTest(&argc, argv);
